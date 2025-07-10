@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-import {getAllExcelDataOfUser,deleteExcelById,getExcelId} from '../APIServices/ExcelApi'
-import {getAllChartDataByUser,deleteChartDataByUser} from '../APIServices/ChartApi'
+import { getAllExcelDataOfUser, deleteExcelById, getExcelId } from '../APIServices/ExcelApi'
+import { getAllChartDataByUser, deleteChartDataByUser, getChartByExcelFile } from '../APIServices/ChartApi'
 import Cookie from 'js-cookie'
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -20,10 +20,13 @@ import Footer from '../Components/Footer';
 
 function DashBoard() {
   const [ExcelPreview, setExcelPreview] = useState([]);
+  const [selectedExcelId, setSelectedExcelId] = useState(null)
   const [excelData, setExcelData] = useState([])
   const [excelFileName, setExcelFileName] = useState()
   const [excelId, setExcelId] = useState()
   const [chartData, setChartData] = useState([])
+  const [chartDataByExcel, setChartDataByExcel] = useState([])
+  const [showNoChartMsg, setShowNoChartMsg] = useState(false);
   const navigate = useNavigate();
   const userId = window.localStorage.getItem("userID")
   const chartStyles = {
@@ -48,7 +51,7 @@ function DashBoard() {
       setExcelFileName(filename)
       // toast.success('fetching successful')
     } catch (error) {
-      toast.error("Excel Data Fetching failed" );
+      toast.error("Excel Data Fetching failed");
     }
   };
 
@@ -58,13 +61,13 @@ function DashBoard() {
       console.log(res.data.chart)
       setChartData(res.data.chart)
     } catch (error) {
-      toast.error( "Chart Data Fetching failed" );
+      toast.error("Chart Data Fetching failed");
     }
   }
 
-  // useEffect(()=>{
+  useEffect(() => {
 
-  // },[])
+  }, [])
 
   useEffect(() => {
     fetchChartData()
@@ -83,25 +86,34 @@ function DashBoard() {
       toast.success("Associated charts deleted");
 
       fetchAllData()
-      fetchChartData()
+      // fetchChartData()
     } catch (error) {
-      toast.error( " fail to delete excel File" )
+      toast.error(" fail to delete excel File")
     }
   }
 
-  const handlePreview=async(id)=>{
+  const handlePreview = async (id) => {
     console.log(id)
-   try {
-    const res = await getExcelId(id)
-    // console.log(res.data.excel.ExcelData)
-   setExcelPreview(res.data.excel.ExcelData)
-   } catch (error) {
-    toast.error('fetching failed')
-   }
+    try {
+      const res = await getExcelId(id)
+      setSelectedExcelId(id)
+      // console.log(res.data.excel.ExcelData)
+      setExcelPreview(res.data.excel.ExcelData)
+    } catch (error) {
+      toast.error('fetching failed')
+    }
   }
 
-  const showExcelIdRelatedChart=(id)=>{
-console.log(id)
+  const showExcelIdRelatedChart = async (id) => {
+    console.log(id)
+    try {
+      const res = await getChartByExcelFile(id)
+      setChartDataByExcel(res.data.chart)
+      setShowNoChartMsg(res.data.chart.length === 0)
+      // console.log(res.data.chart[0])
+    } catch (error) {
+      toast.error('fetching failed')
+    }
   }
 
 
@@ -110,47 +122,26 @@ console.log(id)
     <div>
       <Navbar />
       <div>
-        <div className='flex justify-between mr-20 ml-20'>
-          <div className="stats stats-vertical shadow mt-28">
-            <div className="stat">
-              <button className="btn bg-blue-400" onClick={() => navigate('/uploadExcel', { state: excelFileName })}    >UPLOAD EXCEL </button>
-            </div>
-            <div className="stat">
-              <div className="stat-title">Excel File Uploaded</div>
-              <p className="text-2xl font-bold">{excelData.length}</p>
-              <progress className="progress progress-info w-56 " value={excelData.length} max="20"></progress>
-            </div>
-            <div className="stat">
-              <div className="stat-title">Charts Uploaded</div>
-              <p className="text-2xl font-bold ">{chartData.length}</p>
-              <progress className="progress progress-info w-56 " value={chartData.length} max="20"></progress>
+        <div className='flex justify-between mr-20 ml-2'>
+          <div className="stats stats-vertical shadow mt-28 bg-base-200 h-[500px] w-[300px]">
+            <div>
+              <div className="stat">
+                <button className="btn bg-blue-400" onClick={() => navigate('/uploadExcel', { state: excelFileName })}    >UPLOAD EXCEL </button>
+              </div>
+              <div className="stat">
+                <div className="stat-title">Excel File Uploaded</div>
+                <p className="text-2xl font-bold">{excelData.length}</p>
+                <progress className="progress progress-info w-56 " value={excelData.length} max="20"></progress>
+              </div>
+              <div className="stat">
+                <div className="stat-title">Charts Uploaded</div>
+                <p className="text-2xl font-bold ">{chartData.length}</p>
+                <progress className="progress progress-info w-56 " value={chartData.length} max="20"></progress>
+              </div>
             </div>
           </div>
-          <div>
-            <div className='flex justify-around mt-28'>
-              {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 my-6 mx-4 ">
-              <div className="card bg-white shadow-md p-4 rounded-xl text-center">
-              <Link to="/uploadExcel"> <button className="btn btn-accent"   >UPLOAD ONLY EXCEL FILE</button></Link>
-              </div>
-              <div className="card bg-white shadow-md p-4 rounded-xl text-center">
-              <h2 className="text-xl font-semibold text-gray-600">Excel Files Uploaded</h2>
-              <p className="text-2xl font-bold">{excelData.length}</p>
-              <progress className="progress progress-info w-56" value={excelData.length} max="10"></progress>
-              </div>
-              <div className="card bg-white shadow-md p-4 rounded-xl text-center">
-              <h2 className="text-xl font-semibold text-gray-600">Charts Created</h2>
-              <p className="text-2xl font-bold">{chartData.length}</p>
-                 <progress className="progress progress-info w-56" value={chartData.length} max="10"></progress>
-              </div>
-              </div> */}
-
-              {/* <Link to="/uploadExcel"> <button className="btn btn-accent"   >UPLOAD ONLY EXCEL FILE</button></Link>
-            <span className='w-50 h-50 border-2 rounded-[10px] p-3 text-black bg-white'>{excelData.length} excel uploaded <br></br>
-            <progress className="progress progress-info w-56" value={excelData.length} max="10"></progress>
-            </span>
-            <span className='w-50 h-50 border-2 rounded-[10px] p-3 text-black bg-blue-400'>count of charts upload</span> */}
-            </div>
-            {excelData.length > 0 ? (<div className="overflow-x-auto border-2 rounded-lg shadow  w-[800px] m-auto">
+          <div >
+            {excelData.length > 0 ? (<div className="overflow-x-auto border-2 rounded-lg shadow  mt-28 w-[800px] m-auto">
               <h3 className='text-center font-bold'>Recent file uploaded</h3>
               <table className="table bg-white  ">
                 <thead className="bg-gray-100">
@@ -196,62 +187,78 @@ console.log(id)
             </div>) :
               (<p className='text-center mt-10'>No Excel File uploaded yet....</p>)
             }
-            
-          </div>
-          
-        </div>
-        <div className='w-[800px] m-auto  mt-5 '>
-          {/* <h1>Excel Preview</h1> */} 
-          {ExcelPreview.length > 0 && (
-            <div className="overflow-x-auto border-2 rounded-[10px]  p-4">
-              <h2 className="text-xl font-semibold mb-3 text-center">Excel File Preview</h2>
-              {/* <button onClick={showExcelIdRelatedChart}>visualize chart</button> */}
-              <table className="table table-zebra w-full border">
-                <thead>
-                  <tr>
-                    
-                    {Object.keys(ExcelPreview[0]).map((key) => (
-                      <th key={key} className="border px-2 py-1 bg-gray-100">{key}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {ExcelPreview.map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                      {Object.values(row).map((value, index) => (
-                        <td key={index} className="border px-2 py-1">{value}</td>
+            <div className='w-[800px] m-auto  mt-5 '>
+              {/* <h1>Excel Preview</h1> */}
+              {ExcelPreview.length > 0 && (
+                <div className="overflow-x-auto border-2 rounded-[10px]  p-4">
+                  <h2 className="text-xl font-semibold mb-3 text-center">Excel File Preview</h2>
+                  {/* <button onClick={showExcelIdRelatedChart}>visualize chart</button> */}
+                  <table className="table table-zebra w-full border">
+                    <thead>
+                      <tr>
+
+                        {Object.keys(ExcelPreview[0]).map((key) => (
+                          <th key={key} className="border px-2 py-1 bg-gray-100">{key}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ExcelPreview.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {Object.values(row).map((value, index) => (
+                            <td key={index} className="border px-2 py-1">{value}</td>
+                          ))}
+                        </tr>
                       ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className='flex justify-center mt-10'>
-              <button className="btn btn-accent " onClick={() => setExcelPreview([])}>close</button>
-              <button className="btn btn-accent " onClick={() => showExcelIdRelatedChart(excelId)}>visualize  </button>
-              </div>
+                    </tbody>
+                  </table>
+                  <div className='flex justify-center mt-10 '>
+                    <button className="btn btn-accent mr-5 " onClick={() => {
+                      setExcelPreview([]);
+                      setChartDataByExcel([]);
+                      setShowNoChartMsg(false);
+                    }}>close</button>
+                    <button className="btn btn-accent " onClick={() => showExcelIdRelatedChart(selectedExcelId)}>visualize  </button>
+                  </div>
+                </div>
+              )}
             </div>
-          ) }
+          </div>
         </div>
         <div>
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-              {chartData.map((chart) => {
-                // <p className='text-center mt-20'>Recent Charts</p>
-                const ChartComponent = chartStyles[chart.chartType];
-                if (!ChartComponent) return <div key={chart._id}>Invalid chart type: {chart.chartType}</div>;
+              {showNoChartMsg && chartDataByExcel.length === 0 ? (
+                <div role="alert" className="alert alert-error place-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>No charts found for this Excel file Click <strong>Analyse</strong> first, then come back to Visualize.</span>
+                </div>
+                //  toast.error(  "No charts found for this Excel file Click <strong>Analyse</strong> first, then come back to Visualize.")
+                // <p className="text-center mt-8 italic text-gray-500 m-10" >
+                // </p>
+              ) : (
+                chartDataByExcel.map((chart) => {
+                  const ChartComponent = chartStyles[chart.chartType];
+                  if (!ChartComponent) {
+                    return (
+                      <div key={chart._id}>
+                        Invalid chart type: {chart.chartType}
+                      </div>
+                    );
+                  }
 
-                const chartData = {
-                  labels: chart.labels,
-                  datasets: chart.datasets,
-                };
+                  const data = { labels: chart.labels, datasets: chart.datasets };
 
-                return (
-                  <div key={chart._id} className="bg-white p-4 rounded-xl shadow">
-                    <h2 className="text-xl font-semibold mb-2">{chart.chartTitle}</h2>
-                    <ChartComponent data={chartData} />
-                  </div>
-                );
-              })}
+                  return (
+                    <div key={chart._id} className="bg-white p-4 rounded-xl shadow ">
+                      <h2 className="text-xl font-semibold mb-2">{chart.chartTitle}</h2>
+                      <ChartComponent data={data} />
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
         </div>

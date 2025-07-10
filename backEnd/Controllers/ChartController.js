@@ -57,6 +57,17 @@ const fetchChartDataByUser =async(req,res)=>{
   }
 };
 
+const getChartByExcelFile =async(req,res)=>{
+  // console.log(req.params.id)
+  try {
+    const chartByExcelFile = await Chart.find({excelFileId : req.params.id})
+      res.status(200).json({ msg: 'Fetched chart by excelfile', chart: chartByExcelFile });
+  } catch (error) {
+       res.status(500).json({ msg: 'Upload failed'});
+  
+  }
+}
+
 
 const AllChartData=async(req,res)=>{
   try {
@@ -78,4 +89,4 @@ const deleteChartData = async(req,res)=>{
   }
 }
 
-export { saveChartData,fetchChartDataByUser,deleteChartData,AllChartData}
+export { saveChartData,fetchChartDataByUser,deleteChartData,AllChartData,getChartByExcelFile}
