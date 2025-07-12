@@ -6,6 +6,7 @@ import { Bar, Doughnut, Line, Pie, PolarArea, Bubble, Scatter, Radar } from 'rea
 import toast from 'react-hot-toast';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import Cookie from 'js-cookie'
 
 
 
@@ -19,7 +20,10 @@ function AllChartDisplay() {
     Scatter
   };
 
-  const chartDownloadRef = useRef(null)
+    const username = window.localStorage.getItem("username")
+     const userId = window.localStorage.getItem("userID")
+  const chartDownloadRef = useRef({})
+   const token = Cookie.get('Token')
 
 
   const getAllExcelData = async () => {
@@ -40,6 +44,7 @@ function AllChartDisplay() {
       <h2 className="text-xl font-semibold mb-3 mt-10  text-center">Charts Preview</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
         {getAllCharts.map((chart) => {
+          // console.log(chart.uploadedBy)
           const ChartComponent = chartStyles[chart.chartType];
           if (!ChartComponent) return <div key={chart._id}>Invalid chart type: {chart.chartType}</div>;
           const chartData = {
@@ -56,8 +61,9 @@ function AllChartDisplay() {
           //   link.click();
           // }
 
-          const downloadPDF = async () => {
-    const canvas = chartDownloadRef.current?.canvas; // Get the canvas from the chart
+          const downloadPDF = async (chartId) => {
+    const chart = chartDownloadRef.current[chartId];
+    const canvas = chart?.canvas
     if (!canvas) return;
 
     const canvasImage = await html2canvas(canvas); // convert canvas to image
@@ -73,13 +79,47 @@ function AllChartDisplay() {
     pdf.save('chart.pdf');
   };
 
+  const downloadPNG = (chartId) => {
+  const chart = chartDownloadRef.current[chartId];
+ if (!chart) return;
+
+  // 1. Get the original canvas
+  const src = chart.canvas;
+  const { width, height } = src;
+
+  // 2. Draw onto a temp canvas with a white background
+  const dest = document.createElement('canvas');
+  dest.width = width;
+  dest.height = height;
+  const ctx = dest.getContext('2d');
+
+  ctx.fillStyle = '#ffffff';      // your desired background
+  ctx.fillRect(0, 0, width, height);
+  ctx.drawImage(src, 0, 0);
+
+  // 3. Export that temp canvas
+  const base64 = dest.toDataURL('image/png');
+  const link = document.createElement('a');
+  link.href = base64;
+  link.download = `${chart.options?.plugins?.title?.text || 'chart'}.png`;
+  link.click();
+};
+
 
           return (
 
             <div key={chart._id} className="bg-white p-4 rounded-xl shadow border-2">
               <h2 className="text-xl font-semibold mb-2">{chart.chartTitle}</h2>
-              <ChartComponent data={chartData} ref={chartDownloadRef} />
-              <button onClick={downloadPDF} className='btn bg-blue-500'>download PDF</button>
+              {chart.uploadedBy === userId ?      <h2 className="italic bg-blue-100">{username}</h2> : ""}
+              <ChartComponent data={chartData}  ref={el => (chartDownloadRef.current[chart._id] = el)} />
+                {token ? 
+                <div>
+              <button onClick={()=>downloadPDF(chart._id)} className='btn bg-blue-400'>Export PDF</button>
+              <button onClick={()=>downloadPNG(chart._id)} className='btn bg-blue-400'>download PNG</button>
+                </div> :  <div>
+              <button onClick={()=> toast.error("signup/signIn for download")} className='btn bg-blue-400'>Export PDF</button>
+              <button onClick={()=> toast.error("signup/signIn for download")} className='btn bg-blue-400'>download PNG</button>
+                </div>}
             </div>
           );
         })}

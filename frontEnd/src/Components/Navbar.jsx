@@ -94,7 +94,10 @@ function Navbar() {
                     <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link>
                   <li><button onClick={handleLogout}><FiLogOut />Logout</button>  </li>
                 </div> :
-                <li><button onClick={openLogin}><VscSignIn />SignIn/SignUp</button></li>}
+                <div>
+                  <li><button onClick={openLogin}><VscSignIn />SignIn/SignUp</button></li>
+                     <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link>
+                </div>}
                 {role === "user" ?  <li> <button onClick={() => toast.error("Not Authorized")}><MdAdminPanelSettings />Admin Login</button></li> : 
                  <li> <button onClick={openAdmin}><MdAdminPanelSettings />Admin Login</button></li>
                 }

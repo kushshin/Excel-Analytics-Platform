@@ -26,6 +26,7 @@ const navigate = useNavigate()
         window.localStorage.setItem("userID", res.data.userid);
         window.localStorage.setItem("username", res.data.username);
         window.localStorage.setItem("Role", res.data.role);
+        window.localStorage.setItem("Email", res.data.email);
         document.getElementById("my_modal_1").close();
         navigate("/DashBoard");
       }

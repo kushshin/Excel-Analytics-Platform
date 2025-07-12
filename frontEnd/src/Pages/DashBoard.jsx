@@ -17,6 +17,10 @@ import { Chart as ChartJS } from 'chart.js/auto';
 // import AllChartDisplay from './AllChartDisplay';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import { RiGalleryView2 } from "react-icons/ri";
+import { FaDownload } from "react-icons/fa6";
+import { FaUpload } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 
 function DashBoard() {
   const [ExcelPreview, setExcelPreview] = useState([]);
@@ -26,9 +30,15 @@ function DashBoard() {
   const [excelId, setExcelId] = useState()
   const [chartData, setChartData] = useState([])
   const [chartDataByExcel, setChartDataByExcel] = useState([])
+  const [selecteChartType, setSelectedChartType] = useState("")
+  const [chartStyle, setChartStyle] = useState('');
   const [showNoChartMsg, setShowNoChartMsg] = useState(false);
   const navigate = useNavigate();
   const userId = window.localStorage.getItem("userID")
+  const username = window.localStorage.getItem("username")
+  const email = window.localStorage.getItem("Email")
+
+  const newUsername = username.trim().split(/\s+/).map(word => word[0].toUpperCase()).join('');
   const chartStyles = {
     Bar, Line, Pie, Doughnut,
     Radar,
@@ -122,25 +132,120 @@ function DashBoard() {
     <div>
       <Navbar />
       <div>
-        <div className='flex justify-between mr-20 ml-2'>
-          <div className="stats stats-vertical shadow mt-28 bg-base-200 h-[500px] w-[300px]">
-            <div>
-              <div className="stat">
-                <button className="btn bg-blue-400" onClick={() => navigate('/uploadExcel', { state: excelFileName })}    >UPLOAD EXCEL </button>
+        <div className=' flex justify-between mr-20'>
+          <div className='w-[250px] border-2 bg-base-200 border-b-0 h-[700px] mt-16 p-4'>
+            <div className='w-[100px] h-[100px] rounded-full text-center pt-8 text-[24px] ml-10 bg-gray-200'>
+           <strong>{newUsername}</strong>  
+            </div>
+            <h1 class="px-4 py-2 rounded-lg font-medium
+         bg-base-200 text-base-content/80
+         hover:bg-base-300 hover:text-black
+         transition-colors duration-150 ml-5">{email}</h1>
+         <hr />
+          <ul class="w-48 mt-10 space-y-2 ">
+  <Link to='/chartGallery'><li
+    class="px-4 py-2 rounded-lg font-medium
+           bg-base-200 text-base-content/80
+           hover:bg-base-300 hover:text-black
+           transition-colors duration-150  flex  items-center justify-around"
+  >
+    <FaDownload />
+    Download
+  </li></Link>
+  <Link to='/chartGallery'><li
+    class="px-0 py-2 rounded-lg font-medium
+           bg-base-200 text-base-content/80
+           hover:bg-base-300 hover:text-black
+           transition-colors duration-150  flex items-center  justify-around "
+  ><RiGalleryView2 />
+     Charts
+  </li></Link>
+ <Link to='/uploadExcel'> <li
+    class="px-4 py-2 rounded-lg font-medium
+           bg-base-200 text-base-content/80
+           hover:bg-base-300 hover:text-black
+           transition-colors duration-150  flex items-center justify-around"
+  ><FaUpload />
+     File Upload
+  </li></Link>
+  <li
+    class="px-0 py-2 rounded-lg font-medium
+           bg-base-200 text-base-content/80
+           hover:bg-base-300 hover:text-black
+           transition-colors duration-150 flex  items-center justify-around "
+  ><FaCalendarAlt />
+    Calendar
+  </li>
+</ul>
+
+          </div>
+          {/* upload file and recent file uploaded */}
+          <div >
+                  <h1 className="text-3xl font-bold mt-28"><span className='text-blue-500'>O</span>ver<span className='text-blue-500'>V</span>iew</h1>
+          <div className="stats shadow h-[100px] mt-10">
+            <div className="stat">
+              <div className="stat-figure text-secondary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="inline-block h-8 w-8 stroke-current"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
               </div>
-              <div className="stat">
-                <div className="stat-title">Excel File Uploaded</div>
+            <button className="btn bg-blue-400" onClick={() => navigate('/uploadExcel', { state: excelFileName })}    >UPLOAD EXCEL </button>
+            </div>
+
+            <div className="stat">
+              <div className="stat-figure text-secondary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="inline-block h-8 w-8 stroke-current"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                  ></path>
+                </svg>
+              </div>
+              <div className="stat-title">Excel File Uploaded</div>
                 <p className="text-2xl font-bold">{excelData.length}</p>
                 <progress className="progress progress-info w-56 " value={excelData.length} max="20"></progress>
+            </div>
+
+            <div className="stat">
+              <div className="stat-figure text-secondary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="inline-block h-8 w-8 stroke-current"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                  ></path>
+                </svg>
               </div>
-              <div className="stat">
-                <div className="stat-title">Charts Uploaded</div>
+               <div className="stat-title">Charts Uploaded</div>
                 <p className="text-2xl font-bold ">{chartData.length}</p>
                 <progress className="progress progress-info w-56 " value={chartData.length} max="20"></progress>
-              </div>
             </div>
           </div>
           <div >
+        </div>
             {excelData.length > 0 ? (<div className="overflow-x-auto border-2 rounded-lg shadow  mt-28 w-[800px] m-auto">
               <h3 className='text-center font-bold'>Recent file uploaded</h3>
               <table className="table bg-white  ">
@@ -224,10 +329,10 @@ function DashBoard() {
               )}
             </div>
           </div>
-        </div>
+          </div>
         <div>
           <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-1">
               {showNoChartMsg && chartDataByExcel.length === 0 ? (
                 <div role="alert" className="alert alert-error place-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
@@ -240,6 +345,7 @@ function DashBoard() {
                 // </p>
               ) : (
                 chartDataByExcel.map((chart) => {
+                  console.log(chart)
                   const ChartComponent = chartStyles[chart.chartType];
                   if (!ChartComponent) {
                     return (
@@ -252,9 +358,19 @@ function DashBoard() {
                   const data = { labels: chart.labels, datasets: chart.datasets };
 
                   return (
-                    <div key={chart._id} className="bg-white p-4 rounded-xl shadow ">
+                    <div key={chart._id} className="bg-white p-4 rounded-xl shadow border-2 ">
+                      <h2 className='text-center italic font-bold bg-blue-100 w-32 m-auto'>{chart.chartType}</h2>
                       <h2 className="text-xl font-semibold mb-2">{chart.chartTitle}</h2>
                       <ChartComponent data={data} />
+                      {/* <div>
+                        <label>Chart Type</label>
+                        <select className="select select-bordered w-full" value={chartStyle} onChange={(e) => setChartStyle(e.target.value)} >
+                          <option value="">Select</option>
+                          {chartStyles.map((style) => (
+                            <option key={style} value={style}>{style}</option>
+                          ))}
+                        </select>
+                      </div> */}
                     </div>
                   );
                 })
