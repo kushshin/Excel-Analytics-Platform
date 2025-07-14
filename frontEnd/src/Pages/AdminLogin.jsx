@@ -1,6 +1,7 @@
 import React ,{useState}from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { adminLogin } from '../APIServices/AdminApi'
 import toast from 'react-hot-toast'
 import { RiCloseLargeFill } from "react-icons/ri";
 
@@ -14,10 +15,7 @@ function AdminLogin() {
     console.log('clicked')
     e.preventDefault()
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/adminlogin",{ email, password, role : 'admin'}, {
-          withCredentials: true,
-          credentials: "include",
-        })
+      const res = await adminLogin({ email, password, role : 'admin'})
         console.log(res.data)
           if (res.data) {
                toast.success("admin Login successful");

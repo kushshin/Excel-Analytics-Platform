@@ -251,7 +251,7 @@ function CreateChart() {
             )}
             {chart3DType === 'ThreeJS-Pie' && (<div className="h-[600px] w-full"><PieChart3D
               labels={labels}
-              values={excelData.map(r => console.log(r[excelYaxis[0]]))}
+              values={excelData.map(r =>(r[excelYaxis[0]]))}
               colors={COLORS}
             />
             </div>
