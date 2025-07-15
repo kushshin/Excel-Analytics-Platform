@@ -7,7 +7,7 @@ const router = Router()
 router.get('/allUsers', adminValidationMiddleware,AllUserData)
 router.get('/AllExcels',adminValidationMiddleware,AllExcelData)
 router.get('/AllCharts',adminValidationMiddleware,AllChartData)
-router.post('/adminlogin',adminValidationMiddleware,Adminlogin)
+router.post('/adminlogin',Adminlogin)
 // router.get('/Dashboard/:id', adminValidationMiddleware , Dashboard)
 
 

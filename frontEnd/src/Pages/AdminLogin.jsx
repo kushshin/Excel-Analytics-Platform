@@ -8,6 +8,7 @@ import { RiCloseLargeFill } from "react-icons/ri";
 function AdminLogin() {
   const[email,setEmail] = useState("")
   const[password,setPassword] = useState("")
+  const[error,setError] = useState("")
 
   const navigate = useNavigate()
 
@@ -28,7 +29,8 @@ function AdminLogin() {
                 navigate("/AdminDashBoard");
           }
     } catch (error) {
-       toast.error(error, "admin already exists");
+      const msg = error.response.data.error || "Something went wrong";
+      setError(msg)
     }
 
   }
@@ -40,7 +42,11 @@ function AdminLogin() {
         <form method="dialog" className="modal-action">
           <fieldset className="bg-base-200 border-base-300 rounded-box p-4 w-[300px]">
             <legend className="text-lg font-bold mb-2">AdminLogin</legend>
-
+  {error && (
+  <div className="text-red-500 font-medium mb-4">
+    {error}
+  </div>
+)}
             <label className="label">Email</label>
             <input type="email" className="input mb-2 w-64" value={email} placeholder="Email" onChange={(e)=>setEmail(e.target.value)} /> <br />
 

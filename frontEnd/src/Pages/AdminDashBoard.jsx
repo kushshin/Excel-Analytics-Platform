@@ -9,20 +9,21 @@ import {
 } from "lucide-react";
 import AdminNavbar from "../Components/AdminNavbar";
 import Footer from "../Components/Footer";
-import { allUsers, allExcel } from "../APIServices/AdminApi";
+import { allUsers, allExcel,allChart } from "../APIServices/AdminApi";
 import toast from "react-hot-toast";
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [excels, setExcels] = useState([]);
+  const [charts, setCharts] = useState([]);
 
-  // -------------------- Data Fetching -------------------- //
+ 
   const fetchAllUsers = async () => {
     try {
       const res = await allUsers();
       setUsers(res.data);
     } catch (error) {
-      toast.error("User fetch failed");
+      toast.error("User fetching failed");
     }
   };
 
@@ -31,16 +32,26 @@ export default function AdminDashboard() {
       const res = await allExcel();
       setExcels(res.data);
     } catch (error) {
-      toast.error("Excel fetch failed");
+      toast.error("Excel fetching failed");
+    }
+  };
+
+  const fetchAllChart = async () => {
+    try {
+      const res = await allChart();
+      console.log(res.data)
+    setCharts(res.data);
+    } catch (error) {
+      toast.error("chart fetching failed");
     }
   };
 
   useEffect(() => {
     fetchAllUsers();
     fetchAllExcel();
+    fetchAllChart();
   }, []);
 
-  // -------------------- Helpers -------------------- //
   const SidebarLink = ({ to, icon: Icon, label }) => (
     <Link
       to={to}
@@ -61,16 +72,16 @@ export default function AdminDashboard() {
           Admin
         </h1>
         <nav className="flex flex-1 flex-col space-y-1">
-          <SidebarLink to="/admin" icon={LayoutDashboard} label="Dashboard" />
-          <SidebarLink to="/admin/users" icon={UsersIcon} label="Users" />
-          <SidebarLink to="/admin/files" icon={FileSpreadsheet} label="Files" />
-          <SidebarLink to="/admin/analytics" icon={BarChart3} label="Analytics" />
+          <SidebarLink to="/AdminDashBoard" icon={LayoutDashboard} label="Dashboard" />
+          <SidebarLink to="/" icon={UsersIcon} label="Users" />
+          <SidebarLink to="/" icon={FileSpreadsheet} label="Files" />
+          <SidebarLink to="/" icon={BarChart3} label="chart Gallery" />
           <div className="mt-auto pt-4">
             <SidebarLink to="/admin/settings" icon={Settings} label="Settings" />
           </div>
         </nav>
       </aside>
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col mt-16">
         <main className="flex flex-col gap-10 p-6">
           <section className="card overflow-hidden rounded-box border border-base-content/5 bg-base-100 shadow">
             <header className="bg-base-200 px-4 py-3 text-lg font-medium">
@@ -137,11 +148,53 @@ export default function AdminDashboard() {
                       <td>{i + 1}</td>
                       <td>{file.filename}</td>
                       <td>{(file.fileSize / 1024).toFixed(2)} KB</td>
-                      <td>{file.uploadedBy}</td>
+                       {users.map((user)=>user._id === file.uploadedBy ?  <td key={user._id}>{user.username}</td> : "") }
                       <td className="flex justify-center">
                         <button
                           className="btn btn-ghost btn-xs"
                           onClick={() => console.log("delete file", file._id)}
+                        >
+                          <img
+                            src="/img/trash.png"
+                            alt="delete"
+                            className="h-5 w-5"
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+           <section className="card overflow-hidden rounded-box border border-base-content/5 bg-base-100 shadow">
+            <header className="bg-base-200 px-4 py-3 text-lg font-medium">
+              Charts ({charts.length})
+            </header>
+            <div className="overflow-x-auto">
+              <table className="table table-zebra w-full">
+                <thead>
+                  <tr className="bg-base-200 text-base font-semibold">
+                    <th>Sr.</th>
+                    <th>Title</th>
+                    <th>ChartType</th>
+                    <th>ExcelfileName</th>
+                    <th>CreatedBy</th>
+                    <th className="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {charts.map((chart, i) => (
+                    <tr key={chart._id} className="hover:bg-base-300/40">
+                      <td>{i + 1}</td>
+                      <td>{chart.title}</td>
+                      <td>{chart.chartType}</td>
+                   {excels.map((excel)=>excel._id === chart.excelFileId ?<td key={excel._id}>{excel.filename}</td> : "")  }
+                     {users.map((user)=>user._id === chart.uploadedBy ? <td key={user._id}>{user.username}</td>:"")}
+                 <td className="flex justify-center">
+                        <button
+                          className="btn btn-ghost btn-xs"
+                          onClick={() => console.log("delete user")}
                         >
                           <img
                             src="/img/trash.png"

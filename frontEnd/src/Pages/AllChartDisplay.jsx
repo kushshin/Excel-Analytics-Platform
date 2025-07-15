@@ -24,6 +24,7 @@ function AllChartDisplay() {
      const userId = window.localStorage.getItem("userID")
   const chartDownloadRef = useRef({})
    const token = Cookie.get('Token')
+   const Atoken = Cookie.get('adminToken')
 
 
   const getAllExcelData = async () => {
@@ -112,7 +113,7 @@ function AllChartDisplay() {
               <h2 className="text-xl font-semibold mb-2">{chart.chartTitle}</h2>
               {chart.uploadedBy === userId ?      <h2 className="italic bg-blue-100">{username}</h2> : ""}
               <ChartComponent data={chartData}  ref={el => (chartDownloadRef.current[chart._id] = el)} />
-                {token ? 
+                {token || Atoken ? 
                 <div>
               <button onClick={()=>downloadPDF(chart._id)} className='btn bg-blue-400'>Export PDF</button>
               <button onClick={()=>downloadPNG(chart._id)} className='btn bg-blue-400'>download PNG</button>

@@ -37,7 +37,7 @@ function Navbar() {
 
   }
   const token = Cookie.get('Token')
-  // const admintoken = Cookie.get('adminToken')
+  // const Atoken = Cookie.get('adminToken')
 
   useEffect(() => {
     //  console.log(token,admintoken)

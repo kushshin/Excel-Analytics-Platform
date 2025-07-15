@@ -37,11 +37,11 @@ function AdminNavbar() {
 
   }
 //   const token = Cookie.get('Token')
-  const admintoken = Cookie.get('adminToken')
+  const Atoken = Cookie.get('adminToken')
 
   useEffect(() => {
     //  console.log(admintoken)
-  }, [ admintoken])
+  }, [ Atoken])
 
 
 
@@ -56,15 +56,15 @@ function AdminNavbar() {
             </div>
           </div>
           {/* <Link to="/"> <div className="text-xl font-bold">Excel Analytics Platform</div></Link>     */}
-          <div >
+          {/* <div >
             <Link to='/'>  <button className=" btn mr-2 bg-blue-400">Home</button></Link>
             <a href="#about" className="btn mr-2 ">About Us</a>
             <a href="#contact" className="btn mr-2 ">Contact</a>
-          </div>
+          </div> */}
       
           <div className="dropdown relative ">
             <div tabIndex={0} role="button" className="btn btn-ghost ">
-              {admintoken ?
+              {Atoken ?
                 (<h4 className='mr-1 flex'><span className='font-bold text-blue-500'> {role}</span><FaCaretDown /></h4>) :
                 (<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                   fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,12 +74,12 @@ function AdminNavbar() {
               tabIndex={0}
               // className="  p-0 absolute right-0 top-0 menu menu-sm  bg-blue-100 rounded-box z-1  ">
               className="  absolute right-0 menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3  shadow w-[170px] text-blue-500">
-              {admintoken ?
+              {Atoken ?
                 <div className=' justify-between items-center text-blue-500'>
                   {/* <li> <h4 className='mr-20'><CgProfile /><span className='font-bold'> {username}</span></h4></li> */}
-                  <Link to='/DashBoard'><li><button ><RiDashboard2Fill />DashBoard</button></li> </Link>
-                  <Link to="/uploadExcel"> <li> <button  ><FaUpload />Upload</button></li></Link>
-                    <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link>
+                  {/* <Link to='/DashBoard'><li><button ><RiDashboard2Fill />DashBoard</button></li> </Link>
+                  <Link to="/uploadExcel"> <li> <button  ><FaUpload />Upload</button></li></Link> */}
+                    {/* <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link> */}
                   <li><button onClick={handleLogout}><FiLogOut />Logout</button>  </li>
                 </div> :
                 <li><button onClick={openLogin}><VscSignIn />SignIn/SignUp</button></li>}

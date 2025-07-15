@@ -9,5 +9,6 @@ const API = axios.create({
 // export const registerUser = (userData)=> API.post("/auth/register",userData)
 export const adminLogin = (userData)=>  API.post("/admin/adminlogin",userData)
 export const allUsers = ()=>  API.get("/admin/allUsers")
-export const allExcel = ()=>  API.get("/admin/allExcels")
+export const allExcel = ()=>  API.get("/admin/AllExcels")
+export const allChart = ()=>  API.get("/admin/AllCharts")
 
