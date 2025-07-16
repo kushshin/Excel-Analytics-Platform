@@ -89,4 +89,13 @@ const deleteChartData = async(req,res)=>{
   }
 }
 
-export { saveChartData,fetchChartDataByUser,deleteChartData,AllChartData,getChartByExcelFile}
+const deleteChartDataByChartId = async(req,res)=>{
+  try {
+    await Chart.findOneAndDelete({ _id :  req.params.id })
+      res.status(200).json({ msg: ' chart deleted' });
+  } catch (error) {
+      res.status(500).json({ msg: 'Upload failed' });
+  }
+}
+
+export { saveChartData,fetchChartDataByUser,deleteChartData,AllChartData,getChartByExcelFile,deleteChartDataByChartId}

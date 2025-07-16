@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
-import {getAllChartData} from '../APIServices/ChartApi'
+import {getAllChartData,deleteChartDataByChartId} from '../APIServices/ChartApi'
 import { Bar, Doughnut, Line, Pie, PolarArea, Bubble, Scatter, Radar } from 'react-chartjs-2'
 import toast from 'react-hot-toast';
 import jsPDF from 'jspdf';
@@ -40,6 +40,17 @@ function AllChartDisplay() {
   useEffect(() => {
     getAllExcelData()
   }, [])
+
+
+  const deleteChart = async(id)=>{
+    try {
+     await deleteChartDataByChartId(id)     
+     getAllExcelData()
+    } catch (error) {
+       toast.error({ error: 'chart deletion failed' })
+    }
+  }
+
   return (
     <div className='border-red-500'>
       <h2 className="text-xl font-semibold mb-3 mt-10  text-center">Charts Preview</h2>
@@ -111,7 +122,10 @@ function AllChartDisplay() {
 
             <div key={chart._id} className="bg-white p-4 rounded-xl shadow border-2">
               <h2 className="text-xl font-semibold mb-2">{chart.chartTitle}</h2>
-              {chart.uploadedBy === userId ?      <h2 className="italic bg-blue-100">{username}</h2> : ""}
+              <div className='flex justify-between '>
+              {chart.uploadedBy === userId ?      <h2 className="italic ">{username}</h2> : ""}
+             {chart.uploadedBy === userId ?   <img src="/img/trash.png" alt="" className='w-5 h-5 cursor-pointer'  onClick={()=>deleteChart(chart._id)}/>: ""}
+              </div>
               <ChartComponent data={chartData}  ref={el => (chartDownloadRef.current[chart._id] = el)} />
                 {token || Atoken ? 
                 <div>

@@ -59,6 +59,24 @@ const AllChartData = async(req,res)=>{
     }
 }
 
+const adminExcelDelete = async(req,res)=>{
+    try {
+        const allChartData = await ExcelDataModel.findByIdAndDelete(req.params.id)
+       res.status(200).json({ msg: 'deleted  excel data'});
+  } catch (err) {
+    res.status(500).json({ msg: 'Upload failed', error: err.message });
+  }
+}
+
+const adminChartDelete = async(req,res)=>{
+    try {
+         await chartDataModel.findByIdAndDelete(req.params.id)
+       res.status(200).json({ msg: 'deleted  chart data'});
+  } catch (err) {
+    res.status(500).json({ msg: 'Upload failed', error: err.message });
+  }
+}
 
 
-export {Adminlogin,AllUserData,AllExcelData,AllChartData}
+
+export {Adminlogin,AllUserData,AllExcelData,AllChartData,adminExcelDelete,adminChartDelete}

@@ -9,7 +9,8 @@ import {
 } from "lucide-react";
 import AdminNavbar from "../Components/AdminNavbar";
 import Footer from "../Components/Footer";
-import { allUsers, allExcel,allChart } from "../APIServices/AdminApi";
+import { allUsers, allExcel,allChart ,deleteExcelById,deletChartById} from "../APIServices/AdminApi";
+
 import toast from "react-hot-toast";
 
 export default function AdminDashboard() {
@@ -26,10 +27,11 @@ export default function AdminDashboard() {
       toast.error("User fetching failed");
     }
   };
-
+  
   const fetchAllExcel = async () => {
     try {
       const res = await allExcel();
+      console.log(res.data)
       setExcels(res.data);
     } catch (error) {
       toast.error("Excel fetching failed");
@@ -52,6 +54,28 @@ export default function AdminDashboard() {
     fetchAllChart();
   }, []);
 
+  const handleExcelDelete=async(id)=>{
+    try {
+        await deleteExcelById(id)
+         fetchAllExcel();
+    } catch (error) {
+        toast.error("excel delete failed");
+    }
+  }
+
+  const handleChartDelete=async(id)=>{
+    try {
+        await deletChartById(id)
+         fetchAllChart();
+    } catch (error) {
+        toast.error("excel delete failed");
+    }
+  }
+
+  const getChartCountByUser = (userId) => {
+  return charts.filter((chart) => chart.uploadedBy === userId).length;
+};
+
   const SidebarLink = ({ to, icon: Icon, label }) => (
     <Link
       to={to}
@@ -68,14 +92,14 @@ export default function AdminDashboard() {
         <AdminNavbar />
 
       <aside className="sticky top-0 flex h-screen w-64 flex-col gap-4 border-r border-base-content/10 bg-base-100 p-4 shadow-lg">
-        <h1 className="mb-4 text-center text-2xl font-semibold tracking-wide">
+        <h1 className="mb-4 text-center text-2xl font-semibold tracking-wide mt-20">
           Admin
         </h1>
         <nav className="flex flex-1 flex-col space-y-1">
           <SidebarLink to="/AdminDashBoard" icon={LayoutDashboard} label="Dashboard" />
-          <SidebarLink to="/" icon={UsersIcon} label="Users" />
-          <SidebarLink to="/" icon={FileSpreadsheet} label="Files" />
-          <SidebarLink to="/" icon={BarChart3} label="chart Gallery" />
+          <SidebarLink to="" icon={UsersIcon} label="Users" />
+          <SidebarLink to="" icon={FileSpreadsheet} label="Files" />
+          <SidebarLink to="/AdminChartGallery" icon={BarChart3} label="chart Gallery" />
           <div className="mt-auto pt-4">
             <SidebarLink to="/admin/settings" icon={Settings} label="Settings" />
           </div>
@@ -139,6 +163,7 @@ export default function AdminDashboard() {
                     <th>Filename</th>
                     <th>Size</th>
                     <th>Uploaded By</th>
+                    <th>No.of charts created</th>
                     <th className="text-center">Action</th>
                   </tr>
                 </thead>
@@ -149,10 +174,11 @@ export default function AdminDashboard() {
                       <td>{file.filename}</td>
                       <td>{(file.fileSize / 1024).toFixed(2)} KB</td>
                        {users.map((user)=>user._id === file.uploadedBy ?  <td key={user._id}>{user.username}</td> : "") }
+                      {<td>{getChartCountByUser(file.uploadedBy)}</td>}    
                       <td className="flex justify-center">
                         <button
                           className="btn btn-ghost btn-xs"
-                          onClick={() => console.log("delete file", file._id)}
+                          onClick={() => handleExcelDelete(file._id)}
                         >
                           <img
                             src="/img/trash.png"
@@ -178,7 +204,7 @@ export default function AdminDashboard() {
                     <th>Sr.</th>
                     <th>Title</th>
                     <th>ChartType</th>
-                    <th>ExcelfileName</th>
+                    {/* <th>ExcelfileName</th> */}
                     <th>CreatedBy</th>
                     <th className="text-center">Action</th>
                   </tr>
@@ -189,12 +215,12 @@ export default function AdminDashboard() {
                       <td>{i + 1}</td>
                       <td>{chart.title}</td>
                       <td>{chart.chartType}</td>
-                   {excels.map((excel)=>excel._id === chart.excelFileId ?<td key={excel._id}>{excel.filename}</td> : "")  }
+                   {/* {excels.map((excel)=>excel._id === chart.excelFileId ?<td key={excel._id}>{excel.filename}</td> : "")  } */}
                      {users.map((user)=>user._id === chart.uploadedBy ? <td key={user._id}>{user.username}</td>:"")}
                  <td className="flex justify-center">
                         <button
                           className="btn btn-ghost btn-xs"
-                          onClick={() => console.log("delete user")}
+                          onClick={() => handleChartDelete(chart._id)}
                         >
                           <img
                             src="/img/trash.png"

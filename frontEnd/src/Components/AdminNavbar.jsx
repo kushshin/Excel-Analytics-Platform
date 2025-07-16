@@ -52,7 +52,7 @@ function AdminNavbar() {
           <img src="../img/chart1.png" alt="" className='w-10 h-10 ml-5' />
           <div className="navbar-start flex justify-center items-center  ml-48 ">
             <div className="navbar-center ">
-              <Link to="/"> <div className="text-xl font-bold flex items-center  text-gray-400"><span className='text-blue-600 text-3xl '>C</span>hart <span className='text-blue-600 text-3xl'>E</span>ase <FcComboChart /></div></Link>
+              <Link to=""> <div className="text-xl font-bold flex items-center  text-gray-400"><span className='text-blue-600 text-3xl '>C</span>hart <span className='text-blue-600 text-3xl'>E</span>ase <FcComboChart /></div></Link>
             </div>
           </div>
           {/* <Link to="/"> <div className="text-xl font-bold">Excel Analytics Platform</div></Link>     */}
