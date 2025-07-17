@@ -17,6 +17,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 function CreateChart() {
+  const [chartSummary, setChartSummary] = useState('');
   const [excelXaxis, setExcelXaxis] = useState('');
   const [excelYaxis, setExcelYaxis] = useState([]);
   const [excelData, setExcelData] = useState(null);
@@ -53,6 +54,9 @@ function CreateChart() {
     };
     fetchExcelDataById();
   }, [id]);
+
+ 
+
 
   const saveTodataBase = async () => {
 
@@ -92,6 +96,8 @@ function CreateChart() {
       backgroundColor: backgroundColors[index % backgroundColors.length]
     }))
   };
+
+  
 
   return (
     <div>
@@ -256,6 +262,14 @@ function CreateChart() {
             />
             </div>
             )}
+            <div>
+              {chartSummary && (
+  <div className="mt-6 p-4 bg-blue-100 text-blue-900 rounded-lg shadow text-sm w-[80%] mx-auto">
+    <h4 className="font-semibold text-blue-700 mb-2">AI Summary</h4>
+    <p>{chartSummary}</p>
+  </div>
+)}
+            </div>
             <button className="btn btn-accent mt-4" onClick={saveTodataBase}>SAVE CHART</button>
             {/* '3D-Scatter', '3D-Bar', '3D-Surface', */}
           </div>

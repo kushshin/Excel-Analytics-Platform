@@ -31,6 +31,8 @@ function AdminLogin() {
     } catch (error) {
       const msg = error.response.data.error || "Something went wrong";
       setError(msg)
+      setEmail("")
+      setPassword("")
     }
 
   }

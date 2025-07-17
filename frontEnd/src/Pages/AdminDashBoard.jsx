@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import AdminNavbar from "../Components/AdminNavbar";
 import Footer from "../Components/Footer";
-import { allUsers, allExcel,allChart ,deleteExcelById,deletChartById} from "../APIServices/AdminApi";
+import { allUsers, allExcel,allChart ,deleteExcelById,deleteChartById,deleteUserById} from "../APIServices/AdminApi";
 
 import toast from "react-hot-toast";
 
@@ -65,8 +65,17 @@ export default function AdminDashboard() {
 
   const handleChartDelete=async(id)=>{
     try {
-        await deletChartById(id)
+        await deleteChartById(id)
          fetchAllChart();
+    } catch (error) {
+        toast.error("excel delete failed");
+    }
+  }
+
+  const handleUserDelete=async(id)=>{
+    try {
+        await deleteUserById(id)
+         fetchAllUsers();
     } catch (error) {
         toast.error("excel delete failed");
     }
@@ -136,7 +145,7 @@ export default function AdminDashboard() {
                      {user.role  === 'admin' ? "": <td className="flex justify-center">
                         <button
                           className="btn btn-ghost btn-xs"
-                          onClick={() => console.log("delete user", user._id)}
+                          onClick={() => handleUserDelete(user._id)}
                         >
                           <img
                             src="/img/trash.png"

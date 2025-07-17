@@ -5,6 +5,7 @@ import authRouter from './Routes/authRoute.js'
 import excelRouter from './Routes/ExcelRoute.js'
 import chartRouter from './Routes/chartRoute.js'
 import adminRouter from './Routes/adminRoute.js'
+import chartAIRouter from './Utils/ChartAISummary.js'
 import cors from 'cors';
 import mongoose from 'mongoose';
 import DBconnection from './DBconnection.js';
@@ -28,6 +29,7 @@ app.use(cors(
     app.use('/api/excel', excelRouter)
     app.use('/api/chart', chartRouter)
     app.use('/api/admin', adminRouter)
+    // app.use('/api/chart-summary', chartAIRouter)
     
 //    app.get("/check-token", (req, res) => {
 //   console.log("Token from cookie:", req.cookies.Token);

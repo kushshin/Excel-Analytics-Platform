@@ -12,6 +12,7 @@ export const allUsers = ()=>  API.get("/admin/allUsers")
 export const allExcel = ()=>  API.get("/admin/AllExcels")
 export const allChart = ()=>  API.get("/admin/AllCharts")
 export const deleteExcelById = (id)=>  API.delete(`/admin/DeleteExcelById/${id}`)
-export const deletChartById = (id)=>  API.delete(`/admin/DeleteChartById/${id}`)
+export const deleteChartById = (id)=>  API.delete(`/admin/DeleteChartById/${id}`)
+export const deleteUserById = (id)=>  API.delete(`/admin/DeleteUserById/${id}`)
 
 

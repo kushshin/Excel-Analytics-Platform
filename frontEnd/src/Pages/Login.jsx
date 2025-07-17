@@ -33,9 +33,9 @@ const navigate = useNavigate()
     } catch (error) {
       const msg = error.response.data.error || "Something went wrong";
       setError(msg)
-      // console.log(msg)
-    //  alert(msg)
-      //  toast.error(msg);
+        setEmail("")
+       setPassword("")
+    
     }
 
   }

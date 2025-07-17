@@ -17,6 +17,7 @@ const validationMiddleware =async(req,res,next)=>{
         next()
     })
 }
+
 const adminValidationMiddleware =async(req,res,next)=>{
    const adminToken = req.cookies?.adminToken
 //    console.log({token : token})

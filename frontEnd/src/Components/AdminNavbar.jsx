@@ -51,7 +51,7 @@ function AdminNavbar() {
         <div className="navbar bg-blue-100 shadow-sm  z-10">
           <img src="../img/chart1.png" alt="" className='w-10 h-10 ml-5' />
           <div className="navbar-start flex justify-center items-center  ml-48 ">
-            <div className="navbar-center ">
+            <div className="navbar-center">
               <Link to=""> <div className="text-xl font-bold flex items-center  text-gray-400"><span className='text-blue-600 text-3xl '>C</span>hart <span className='text-blue-600 text-3xl'>E</span>ase <FcComboChart /></div></Link>
             </div>
           </div>
@@ -62,7 +62,7 @@ function AdminNavbar() {
             <a href="#contact" className="btn mr-2 ">Contact</a>
           </div> */}
       
-          <div className="dropdown relative ">
+          <div className="dropdown relative left-72 ">
             <div tabIndex={0} role="button" className="btn btn-ghost ">
               {Atoken ?
                 (<h4 className='mr-1 flex'><span className='font-bold text-blue-500'> {role}</span><FaCaretDown /></h4>) :
