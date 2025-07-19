@@ -55,7 +55,7 @@ function CreateChart() {
     fetchExcelDataById();
   }, [id]);
 
- 
+
 
 
   const saveTodataBase = async () => {
@@ -97,13 +97,13 @@ function CreateChart() {
     }))
   };
 
-  
+
 
   return (
     <div>
       <Navbar />
-        <h2 className="text-xl font-bold mt-24 text-blue-500 italic text-center">Build Your Chart</h2>
-      <div className=" flex p-2 mt-10  border-2    rounded-lg mb-6 m-auto w-[90%] ">
+      <h2 className="text-xl font-bold mt-24 text-blue-500 italic text-center">Build Your Chart</h2>
+      <div className=" lg:flex p-2 mt-10  border-2    rounded-lg mb-6 m-auto w-[90%] ">
 
         {/* <div className="  mt-2 p-2  border-2">
           <div>
@@ -148,99 +148,99 @@ function CreateChart() {
             </select>
           </div>
         </div> */}
-     
-<div className="mt-1 mr-4 p-6 bg-white shadow-lg rounded-2xl ring-1 ring-slate-200
+
+        <div className="mt-1 mr-4 p-6 bg-white shadow-lg rounded-2xl ring-1 ring-slate-200
                 dark:bg-slate-800 dark:ring-slate-700">
-  <h3 className="text-lg italic bg-gray-400 text-center rounded-lg font-semibold text-slate-700 mb-4 dark:text-slate-200">
-    Chart Configuration
-  </h3>
+          <h3 className="text-lg italic bg-gray-400 text-center rounded-lg font-semibold text-slate-700 mb-4 dark:text-slate-200">
+            Chart Configuration
+          </h3>
 
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
 
-    <div className="flex flex-col">
-      <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
-        X‑Axis
-      </label>
-      <select
-        className="select select-bordered w-full bg-slate-50 dark:bg-slate-700
+            <div className="flex flex-col">
+              <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
+                X‑Axis
+              </label>
+              <select
+                className="select select-bordered w-full bg-slate-50 dark:bg-slate-700
                    focus:ring-2 focus:ring-accent/60"
-        value={excelXaxis}
-        onChange={e => setExcelXaxis(e.target.value)}
-      >
-        <option value="">Select</option>
-        {excelHeadings.map(key => (
-          <option key={key} value={key}>
-            {key}
-          </option>
-        ))}
-      </select>
-    </div>
-    <div className="flex flex-col">
-      <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
-        Y‑Axis
-      </label>
-      <select
-        multiple
-        className="select select-bordered w-full h-32 bg-slate-50 dark:bg-slate-700
+                value={excelXaxis}
+                onChange={e => setExcelXaxis(e.target.value)}
+              >
+                <option value="">Select</option>
+                {excelHeadings.map(key => (
+                  <option key={key} value={key}>
+                    {key}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
+                Y‑Axis
+              </label>
+              <select
+                multiple
+                className="select select-bordered w-full h-32 bg-slate-50 dark:bg-slate-700
                    focus:ring-2 focus:ring-accent/60"
-        value={excelYaxis}
-        onChange={e =>
-          setExcelYaxis(Array.from(e.target.selectedOptions, o => o.value))
-        }
-      >
-        {excelHeadings.map(key => (
-          <option key={key} value={key}>
-            {key}
-          </option>
-        ))}
-      </select>
-    </div>
+                value={excelYaxis}
+                onChange={e =>
+                  setExcelYaxis(Array.from(e.target.selectedOptions, o => o.value))
+                }
+              >
+                {excelHeadings.map(key => (
+                  <option key={key} value={key}>
+                    {key}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-    <div className="flex flex-col">
-      <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
-        2‑D Chart
-      </label>
-      <select
-        className="select select-bordered w-full bg-slate-50 dark:bg-slate-700
+            <div className="flex flex-col">
+              <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
+                2‑D Chart
+              </label>
+              <select
+                className="select select-bordered w-full bg-slate-50 dark:bg-slate-700
                    focus:ring-2 focus:ring-accent/60"
-        value={chartStyle}
-        onChange={e => setChartStyle(e.target.value)}
-      >
-        <option value="">Select</option>
-        {chartStyles.map(style => (
-          <option key={style} value={style}>
-            {style}
-          </option>
-        ))}
-      </select>
-    </div>
+                value={chartStyle}
+                onChange={e => setChartStyle(e.target.value)}
+              >
+                <option value="">Select</option>
+                {chartStyles.map(style => (
+                  <option key={style} value={style}>
+                    {style}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-    <div className="flex flex-col">
-      <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
-        3‑D Chart
-      </label>
-      <select
-        className="select select-bordered w-full bg-slate-50 dark:bg-slate-700
+            <div className="flex flex-col">
+              <label className="mb-1 font-medium text-sm text-center text-slate-600 dark:text-slate-300">
+                3‑D Chart
+              </label>
+              <select
+                className="select select-bordered w-full bg-slate-50 dark:bg-slate-700
                    focus:ring-2 focus:ring-accent/60"
-        value={chart3DType}
-        onChange={e => setChart3DType(e.target.value)}
-      >
-        <option value="">Select</option>
-        {chart3DStyle.map(style => (
-          <option key={style} value={style}>
-            {style}
-          </option>
-        ))}
-      </select>
-    </div>
-  </div>
-</div>
+                value={chart3DType}
+                onChange={e => setChart3DType(e.target.value)}
+              >
+                <option value="">Select</option>
+                {chart3DStyle.map(style => (
+                  <option key={style} value={style}>
+                    {style}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
 
 
         {excelXaxis && excelYaxis.length > 0 && chartStyle ? (
-          <div className="w-[80%]">
+          <div className="lg:w-[80%]">
             {chartStyle === 'Bar' && <Bar data={chartDetails} />}
             {chartStyle === 'Line' && <Line data={chartDetails} />}
             {chartStyle === 'Pie' && <Pie data={chartDetails} />}
@@ -257,41 +257,41 @@ function CreateChart() {
             )}
             {chart3DType === 'ThreeJS-Pie' && (<div className="h-[600px] w-full"><PieChart3D
               labels={labels}
-              values={excelData.map(r =>(r[excelYaxis[0]]))}
+              values={excelData.map(r => (r[excelYaxis[0]]))}
               colors={COLORS}
             />
             </div>
             )}
             <div>
               {chartSummary && (
-  <div className="mt-6 p-4 bg-blue-100 text-blue-900 rounded-lg shadow text-sm w-[80%] mx-auto">
-    <h4 className="font-semibold text-blue-700 mb-2">AI Summary</h4>
-    <p>{chartSummary}</p>
-  </div>
-)}
+                <div className="mt-6 p-4 bg-blue-100 text-blue-900 rounded-lg shadow text-sm w-[80%] mx-auto">
+                  <h4 className="font-semibold text-blue-700 mb-2">AI Summary</h4>
+                  <p>{chartSummary}</p>
+                </div>
+              )}
             </div>
             <button className="btn btn-accent mt-4" onClick={saveTodataBase}>SAVE CHART</button>
             {/* '3D-Scatter', '3D-Bar', '3D-Surface', */}
           </div>
         ) : (<div
-  className="hero min-h-screen rounded-xl overflow-hidden"
-  style={{
-    backgroundImage:
-      "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
-  }}
->
-  <div className="hero-overlay"></div>
-  <div className="hero-content text-neutral-content text-center">
-    <div className="max-w-md">
-      <h1 className="mb-5 text-5xl font-bold"><span className='text-blue-500'>H</span>ello <span className='text-blue-500'>T</span>here</h1>
-      <p className="mb-5 text-white italic font-semibold">
-        Upload your data, pick an axis—watch insights come to life in beautiful 2‑D and interactive 3‑D charts.  
-  No coding required, just instant analytics at the click of a button.
-      </p>
-      {/* <button className="btn btn-primary">Get Started</button> */}
-    </div>
-  </div>
-</div>)}
+          className="hero min-h-screen rounded-xl overflow-hidden"
+          style={{
+            backgroundImage:
+              "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
+          }}
+        >
+          <div className="hero-overlay"></div>
+          <div className="hero-content text-neutral-content text-center">
+            <div className="max-w-md">
+              <h1 className="mb-5 text-5xl font-bold"><span className='text-blue-500'>H</span>ello <span className='text-blue-500'>T</span>here</h1>
+              <p className="mb-5 text-white italic font-semibold">
+                Upload your data, pick an axis—watch insights come to life in beautiful 2‑D and interactive 3‑D charts.
+                No coding required, just instant analytics at the click of a button.
+              </p>
+              {/* <button className="btn btn-primary">Get Started</button> */}
+            </div>
+          </div>
+        </div>)}
       </div>
       <Footer />
     </div>

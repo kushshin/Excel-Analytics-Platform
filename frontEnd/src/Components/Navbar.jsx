@@ -14,8 +14,11 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { VscSignIn } from "react-icons/vsc";
 import { FaCaretDown } from "react-icons/fa";
 import { FcComboChart } from "react-icons/fc";
+import { AiFillHome } from "react-icons/ai";
+import { IoIosInformationCircle } from "react-icons/io";
 import { IoMdDownload } from "react-icons/io";
 import { RiGalleryView2 } from "react-icons/ri";
+import { FaPhoneAlt } from "react-icons/fa";
 // import { FaChartLine } from "react-icons/fa";
 
 
@@ -50,30 +53,17 @@ function Navbar() {
       <nav className="  bg-gray-100 shadow-md z-10 fixed top-0 w-[100%]">
         <div className="navbar bg-blue-100 shadow-sm  z-10">
           <img src="../img/chart1.png" alt="" className='w-10 h-10 ml-5' />
-          <div className="navbar-start flex justify-center items-center  ml-48 ">
+          <div className="navbar-start flex justify-center items-center ml-20  lg:ml-48   ">
             <div className="navbar-center ">
               <Link to="/"> <div className="text-xl font-bold flex items-center  text-gray-400"><span className='text-blue-600 text-3xl '>C</span>hart <span className='text-blue-600 text-3xl'>E</span>ase <FcComboChart /></div></Link>
             </div>
           </div>
           {/* <Link to="/"> <div className="text-xl font-bold">Excel Analytics Platform</div></Link>     */}
-          <div >
+          <div className='hidden md:flex items-center space-x-6 mr-2' >
             <Link to='/'>  <button className=" btn mr-2 bg-blue-400">Home</button></Link>
             <a href="#about" className="btn mr-2 ">About Us</a>
-            <a href="#contact" className="btn mr-5 ">Contact</a>
-            {/* <Link to="#contact">  <button className="btn  mr-2 " >Contact</button></Link> */}
+            <a href="#contact" className="btn mr-8 ">Contact</a>
           </div>
-          {/* <div className="space-x-4 flex">
-            {token ?
-              <div className='flex  justify-between items-center '>
-                <h4 className='mr-2 btn'><span>{username}</span></h4>
-                <Link to='/DashBoard'>  <button className=" btn mr-2">DashBoard</button></Link>
-                <Link to="/uploadExcel">  <button className="btn  mr-2 " >Upload</button></Link>
-                <button className="btn  mr-2" onClick={handleLogout}>MyCharts</button>
-                <button className="btn " onClick={handleLogout}>Logout</button>
-              </div> :
-              <button className="btn " onClick={openLogin}>SignIn/SignUp</button>}
-            <button className="btn  ml-0" onClick={openAdmin}>Admin <br /> Login</button>
-          </div> */}
           <div className="dropdown relative ">
             <div tabIndex={0} role="button" className="btn btn-ghost ">
               {token ?
@@ -91,17 +81,22 @@ function Navbar() {
                   {/* <li> <h4 className='mr-20'><CgProfile /><span className='font-bold'> {username}</span></h4></li> */}
                   <Link to='/DashBoard'><li><button ><RiDashboard2Fill />My DashBoard</button></li> </Link>
                   {/* <li> <button onClick={() => navigate('/uploadExcel', { state: excelFileName })}  ><FaUpload />Upload</button></li> */}
-                    <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link>
+                  <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link>
                   <li><button onClick={handleLogout}><FiLogOut />Logout</button>  </li>
                 </div> :
                 <div>
                   <li><button onClick={openLogin}><VscSignIn />SignIn/SignUp</button></li>
-                     <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link>
+                  <Link to='/chartGallery'><li> <button ><RiGalleryView2 />Chart Gallery</button></li> </Link>
+                  <div className='block lg:hidden md:hidden' >
+                    <Link to='/'>  <li><button className=" mr-2"><AiFillHome />Home</button></li></Link>
+               <li><a href="#about" className=" mr-2 "><IoIosInformationCircle />About Us</a></li>
+                 <li><a href="#contact" className=" mr-5 "><FaPhoneAlt />Contact</a></li>
+                  </div>
                 </div>}
-                {role === "user" ?  <li> <button onClick={() => toast.error("Not Authorized")}><MdAdminPanelSettings />Admin Login</button></li> : 
-                 <li> <button onClick={openAdmin}><MdAdminPanelSettings />Admin Login</button></li>
-                }
-             
+              {role === "user" ? <li> <button onClick={() => toast.error("Not Authorized")}><MdAdminPanelSettings />Admin Login</button></li> :
+                <li> <button onClick={openAdmin}><MdAdminPanelSettings />Admin Login</button></li>
+              }
+
             </ul>
           </div>
         </div>

@@ -132,123 +132,80 @@ function DashBoard() {
     <div>
       <Navbar />
       <div>
-        <div className=' flex justify-between mr-20'>
-          <div className='w-[250px] border-2 bg-base-200 border-b-0 h-[700px] mt-16 p-4'>
-            <div className='w-[100px] h-[100px] rounded-full text-center pt-8 text-[24px] ml-10 bg-gray-200'>
-           <strong>{newUsername}</strong>  
+        <div className=' block lg:flex justify-between mr-20 '>
+          <div className=' w-[490px] md:w-[600px] lg:w-[250px]  text-center border-2 bg-base-100 border-b-0 h-[200px] lg:h-[700px] mt-16 p-4'>
+            <div className='w-[100px]  h-[100px] rounded-full text-center pt-8 text-[24px] ml-48 lg:ml-10 bg-gray-200'>
+              <strong>{newUsername}</strong>
             </div>
             <h1 class="px-4 py-2 rounded-lg font-medium
-         bg-base-200 text-base-content/80
-         hover:bg-base-300 hover:text-black
-         transition-colors duration-150 ml-5">{email}</h1>
-         <hr />
-          <ul class="w-48 mt-10 space-y-2 ">
-  <Link to='/chartGallery'><li
-    class="px-4 py-2 rounded-lg font-medium
-           bg-base-200 text-base-content/80
+                     bg-base-100 text-base-content/80
+                                   hover:bg-base-300 hover:text-black
+                             transition-colors duration-150 ml-5">{email}</h1>
+            <hr />
+            <ul class=" w-96 mt-2 mx-auto lg:w-48 lg:mt-10 lg:space-y-2 flex items-center lg:block">
+              <Link to='/chartGallery'><li
+                class="px-4 lg:py-2 rounded-lg font-medium
+           bg-base-100 text-base-content/80
            hover:bg-base-300 hover:text-black
            transition-colors duration-150  flex  items-center justify-around"
-  >
-    <FaDownload />
-    Download
-  </li></Link>
-  <Link to='/chartGallery'><li
-    class="px-0 py-2 rounded-lg font-medium
-           bg-base-200 text-base-content/80
+              >
+                <FaDownload className='mr-1' />
+                Download
+              </li></Link>
+              <Link to='/chartGallery'><li
+                class="px-0  lg:py-2 rounded-lg font-medium
+           bg-base-100 text-base-content/80
            hover:bg-base-300 hover:text-black
-           transition-colors duration-150  flex items-center  justify-around "
-  ><RiGalleryView2 />
-     Charts
-  </li></Link>
- <Link to='/uploadExcel'> <li
-    class="px-4 py-2 rounded-lg font-medium
-           bg-base-200 text-base-content/80
+           transition-colors duration-150  flex items-center  justify-around"
+              ><RiGalleryView2 className='mr-1' />
+                Charts
+              </li></Link>
+              <Link to='/uploadExcel'> <li
+                class="px-4 lg:py-2 rounded-lg font-medium
+           bg-base-100 text-base-content/80
            hover:bg-base-300 hover:text-black
            transition-colors duration-150  flex items-center justify-around"
-  ><FaUpload />
-     File Upload
-  </li></Link>
-  <li
-    class="px-0 py-2 rounded-lg font-medium
-           bg-base-200 text-base-content/80
+              ><FaUpload className='mr-1' />
+                Upload
+              </li></Link>
+              <li
+                class="px-0 lg:py-2 rounded-lg font-medium
+           bg-base-100 text-base-content/80
            hover:bg-base-300 hover:text-black
-           transition-colors duration-150 flex  items-center justify-around "
-  ><FaCalendarAlt />
-    Calendar
-  </li>
-</ul>
+           transition-colors duration-150 flex  items-center  justify-around"
+              ><FaCalendarAlt className='mr-1' />
+                Calendar
+              </li>
+            </ul>
 
           </div>
           {/* upload file and recent file uploaded */}
           <div >
-                  <h1 className="text-3xl font-bold mt-28"><span className='text-blue-500'>O</span>ver<span className='text-blue-500'>V</span>iew</h1>
-          <div className="stats shadow h-[100px] mt-10">
-            <div className="stat">
-              <div className="stat-figure text-secondary">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block h-8 w-8 stroke-current"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
+            <h1 className="text-3xl font-bold mt-28 text text-center ml-16"><span className='text-blue-500'>O</span>ver<span className='text-blue-500'>V</span>iew</h1>
+            {/* <div className="stats shadow h-[100px] mt-10 w-[450px]">
+            </div> */}
+            <div className='md:flex lg:flex border-2 ml-20 lg:m-0 p-10'>
+              <div className="stat  ">
+                <button className="btn bg-blue-400 w-52 " onClick={() => navigate('/uploadExcel', { state: excelFileName })}    >UPLOAD EXCEL </button>
               </div>
-            <button className="btn bg-blue-400" onClick={() => navigate('/uploadExcel', { state: excelFileName })}    >UPLOAD EXCEL </button>
-            </div>
 
-            <div className="stat">
-              <div className="stat-figure text-secondary">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block h-8 w-8 stroke-current"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                  ></path>
-                </svg>
-              </div>
-              <div className="stat-title">Excel File Uploaded</div>
+              <div className="stat">
+                <div className="stat-title">Excel File Uploaded</div>
                 <p className="text-2xl font-bold">{excelData.length}</p>
                 <progress className="progress progress-info w-56 " value={excelData.length} max="20"></progress>
-            </div>
-
-            <div className="stat">
-              <div className="stat-figure text-secondary">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block h-8 w-8 stroke-current"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                  ></path>
-                </svg>
               </div>
-               <div className="stat-title">Charts Uploaded</div>
+
+              <div className="stat">
+                <div className="stat-title">Charts Uploaded</div>
                 <p className="text-2xl font-bold ">{chartData.length}</p>
                 <progress className="progress progress-info w-56 " value={chartData.length} max="20"></progress>
+              </div>
             </div>
-          </div>
-          <div >
-        </div>
-            {excelData.length > 0 ? (<div className="overflow-x-auto border-2 rounded-lg shadow  mt-28 w-[800px] m-auto">
+            <div >
+            </div>
+            {excelData.length > 0 ? (<div className="overflow-x-auto border-2 rounded-lg shadow  mt-28 w-[480px] lg:w-[800px] m-auto">
               <h3 className='text-center font-bold'>Recent file uploaded</h3>
-              <table className="table bg-white  ">
+              <table className="table bg-white text-[12px] lg:text-[14px] ">
                 <thead className="bg-gray-100">
                   <tr >
                     <th>Sr No.</th>
@@ -265,7 +222,7 @@ function DashBoard() {
                       <td>{item.filename}</td>
                       <td>{new Date(item.updatedAt).toLocaleDateString()}</td>
                       <td>{(item.fileSize / 1024).toFixed(2)} KB</td>
-                      <td className="space-x-2">
+                      <td className="space-y-1 lg:space-x-2 ">
                         <button
                           className="btn btn-sm btn-accent"
                           onClick={() => navigate(`/createChart/${item._id}`)}
@@ -296,9 +253,9 @@ function DashBoard() {
               {/* <h1>Excel Preview</h1> */}
               {ExcelPreview.length > 0 && (
                 <div className="overflow-x-auto border-2 rounded-[10px]  p-4">
-                  <h2 className="text-xl font-semibold mb-3 text-center">Excel File Preview</h2>
+                  <h2 className="text-xl font-semibold mb-3 lg:text-center">Excel File Preview</h2>
                   {/* <button onClick={showExcelIdRelatedChart}>visualize chart</button> */}
-                  <table className="table table-zebra w-full border">
+                  <table className="table table-zebra  w-[48%] lg:w-full border text-[9px] lg:text-[14px]">
                     <thead>
                       <tr>
 
@@ -317,7 +274,7 @@ function DashBoard() {
                       ))}
                     </tbody>
                   </table>
-                  <div className='flex justify-center mt-10 '>
+                  <div className=' ml-36 lg:ml-0 lg:flex justify-center mt-10  '>
                     <button className="btn btn-accent mr-5 " onClick={() => {
                       setExcelPreview([]);
                       setChartDataByExcel([]);
@@ -329,7 +286,7 @@ function DashBoard() {
               )}
             </div>
           </div>
-          </div>
+        </div>
         <div>
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-1">

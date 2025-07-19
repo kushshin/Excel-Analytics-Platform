@@ -40,8 +40,8 @@ function Footer() {
           type="text"
           placeholder="contact Number"
           className="input input-bordered" />
-        <button className="btn bg-blue-400  ml-2">Subscribe</button>
       </div>
+        <button className="btn bg-blue-400  ml-10 lg:ml-2 mt-2 ">Subscribe</button>
     </fieldset>
   </form>
 </footer>

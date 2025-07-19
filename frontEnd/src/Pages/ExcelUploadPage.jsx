@@ -111,7 +111,7 @@ console.log(isDuplicate)
               </div>
             </div>
           ) : (
-            <p className='text-center'>No data available yet.</p>
+            <p className='lg:text-center'>No data available yet.</p>
           )}
         </div>
       </div>
