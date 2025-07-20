@@ -53,8 +53,8 @@ function AllChartDisplay() {
 
   return (
     <div className='border-red-500'>
-      <h2 className="text-xl font-semibold mb-3 mt-10  text-center">Charts Preview</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+      <h2 className="text-xl font-semibold mb-3 mt-10 ml-40 lg:ml-0 lg:text-center">Charts Preview</h2>
+      <div className="w-[480px] md:w-full lg:w-full grid grid-cols md:grid-cols-2 gap-4 p-1">
         {getAllCharts.map((chart) => {
           // console.log(chart.uploadedBy)
           const ChartComponent = chartStyles[chart.chartType];

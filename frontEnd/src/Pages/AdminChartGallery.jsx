@@ -23,20 +23,20 @@ function AdminChartGallery() {
   );
   return (
     <div>
+        <div className='md:flex lg:flex min-h-screen bg-base-200 '>
         <AdminNavbar/>
-        <div className='flex '>
-            <aside className="sticky top-0 flex h-screen w-64 flex-col gap-4 border-r border-base-content/10 bg-base-100 p-4 shadow-lg">
+          <aside className="lg:sticky top-0 flex md:h-screen lg:h-screen w-[100%] md:w-64 lg:w-64 flex-col gap-4 border-r border-base-content/10 bg-base-100 p-4 shadow-lg">
         <h1 className="mb-4 text-center text-2xl font-semibold tracking-wide mt-20">
           Admin
         </h1>
-        <nav className="flex flex-1 flex-col space-y-1 ">
+        <nav className="flex flex-1 flex-row md:flex-col lg:flex-col space-y-1">
           <SidebarLink to="/AdminDashBoard" icon={LayoutDashboard} label="Dashboard" />
           <SidebarLink to="" icon={UsersIcon} label="Users" />
           <SidebarLink to="" icon={FileSpreadsheet} label="Files" />
           <SidebarLink to="/AdminChartGallery" icon={BarChart3} label="chart Gallery" />
-          <div className="mt-auto pt-4">
+          {/* <div className="mt-auto pt-4">
             <SidebarLink to="/admin/settings" icon={Settings} label="Settings" />
-          </div>
+          </div> */}
         </nav>
       </aside>
       <div className='w-[1200px]'>

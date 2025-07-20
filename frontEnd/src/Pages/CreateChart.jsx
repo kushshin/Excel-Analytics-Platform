@@ -274,7 +274,7 @@ function CreateChart() {
             {/* '3D-Scatter', '3D-Bar', '3D-Surface', */}
           </div>
         ) : (<div
-          className="hero min-h-screen rounded-xl overflow-hidden"
+          className="hero min-h-screen rounded-xl overflow-hidden mt-2 "
           style={{
             backgroundImage:
               "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",

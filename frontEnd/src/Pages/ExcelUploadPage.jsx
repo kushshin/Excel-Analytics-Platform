@@ -79,7 +79,7 @@ console.log(isDuplicate)
     <div>
       <Navbar />
       <div className='flex h-[250px] mt-20 justify-center items-center'>
-        <input type="file" name='file' ref={fileInput} className="  file-input file-input-bordered file-input-info w-[700px] " onChange={handleExcel} />
+        <input type="file" name='file' ref={fileInput} className="  file-input file-input-bordered file-input-info lg:w-[700px] " onChange={handleExcel} />
         <button className="btn btn-accent ml-4" onClick={handleExcelUpload}>UPLOAD</button>
 
       </div>
@@ -87,8 +87,8 @@ console.log(isDuplicate)
         <div className="p-4 w-[900px] m-auto">
           {excelData.length > 0 ? (
             <div className="overflow-x-auto ">
-              <h2 className="text-xl font-semibold mb-3 text-center">Excel File Preview</h2>
-              <table className="table table-zebra w-full border">
+              <h2 className="text-xl font-semibold mb-3 ml-40 lg:ml-0 lg:text-center">Excel File Preview</h2>
+              <table className="table table-zebra w-[200px] lg:w-full border text-[9px] lg:text-[12px]">
                 <thead>
                   <tr>
                     {Object.keys(excelData[0]).map((key) => (
@@ -106,7 +106,7 @@ console.log(isDuplicate)
                   ))}
                 </tbody>
               </table>
-              <div className='flex justify-center mt-10'>
+              <div className='flex ml-40 lg:ml-0 lg:justify-center mt-10'>
               <button className="btn btn-accent " onClick={() => navigate(`/createChart/${excelId}`)}>Analyse Data</button>
               </div>
             </div>
