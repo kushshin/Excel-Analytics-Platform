@@ -25,7 +25,7 @@ const Adminlogin = async(req,res)=>{
     
             const admintoken = jwt.sign({id : user._id, role : user.role, email : user.email , username : user.username },process.env.ADMIN_SECRET_KEY)
     
-            res.cookie("adminToken",admintoken)
+            res.cookie("adminToken",admintoken,{httpOnly: true,secure:true, sameSite:'None'})
             res.status(200).json({userid : user._id , email : user.email ,role : user.role, username : user.username})
     } catch (error) {
            res.status(500).json(error , "internal server Error")

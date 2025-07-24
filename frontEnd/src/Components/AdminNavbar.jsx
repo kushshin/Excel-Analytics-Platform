@@ -20,7 +20,7 @@ import { RiGalleryView2 } from "react-icons/ri";
 
 
 function AdminNavbar() {
-//   const openLogin = () => document.getElementById('my_modal_1').showModal();
+  const openLogin = () => document.getElementById('my_modal_1').showModal();
   // const openRegister = () => document.getElementById('my_modal_2').showModal();
 //   const openAdmin = () => document.getElementById('admin_modal').showModal();
   const navigate = useNavigate();
@@ -30,7 +30,9 @@ function AdminNavbar() {
   // console.log(username)
 
   const handleLogout = () => {
-    Cookie.remove("adminToken");
+    Cookie.remove("adminToken",{
+      httpOnly: true,secure:true, sameSite:'None'
+    });
     window.localStorage.clear("");
     toast.success("admin logged out successfully ");
     navigate("/");
@@ -57,7 +59,7 @@ function AdminNavbar() {
           </div>
           <div className="dropdown relative md:left-42 lg:left-52  ">
             <div tabIndex={0} role="button" className="btn btn-ghost">
-              {Atoken ?
+              {username ?
                 (<h4 className='mr-2 flex'><span className='font-bold text-blue-500'> {username}</span><FaCaretDown /></h4>) :
                 (<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                   fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,7 +69,7 @@ function AdminNavbar() {
               tabIndex={0}
               // className="  p-0 absolute right-0 top-0 menu menu-sm  bg-blue-100 rounded-box z-1  ">
               className="  absolute right-0 menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3  shadow w-[170px] text-blue-500">
-              {Atoken ?
+              {username ?
                 <div className=' justify-between items-center text-blue-500'>
                   <li><button onClick={handleLogout}><FiLogOut />Logout</button>  </li>
                 </div> :
