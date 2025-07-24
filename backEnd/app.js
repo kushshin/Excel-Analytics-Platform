@@ -15,13 +15,13 @@ dotenv.config()
 
 const PORT = process.env.PORT || 3000
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cookieParser())
 app.use(cors(
     { origin: "https://excel-analytics-platform-mauve.vercel.app",
         credentials: true
     }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 
 
