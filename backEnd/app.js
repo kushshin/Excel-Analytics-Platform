@@ -19,7 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors(
-    { origin: true,
+    { origin: "https://your-frontend.vercel.app",
         credentials: true
     }))
 
