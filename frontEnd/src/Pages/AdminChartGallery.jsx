@@ -39,7 +39,7 @@ function AdminChartGallery() {
           </div> */}
         </nav>
       </aside>
-      <div className='w-[1200px]'>
+      <div className='w-full px-4 sm:px-6 md:px-8 lg:w-[1200px] mx-auto'>
         <AllChartDisplay/>
       </div>
         </div>
