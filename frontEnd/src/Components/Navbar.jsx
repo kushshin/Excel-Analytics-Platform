@@ -70,7 +70,7 @@ function Navbar() {
           </div>
           <div className="dropdown relative ">
             <div tabIndex={0} role="button" className="btn btn-ghost ">
-              {token ?
+              {username ?
                 (<h4 className='mr-1 flex'><span className='font-bold text-blue-500 '> {username}</span><FaCaretDown /></h4>) :
                 (<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                   fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +80,7 @@ function Navbar() {
               tabIndex={0}
               // className="  p-0 absolute right-0 top-0 menu menu-sm  bg-blue-100 rounded-box z-1  ">
               className="  absolute right-0 menu menu-sm dropdown-content bg-base-100  z-1 mt-3  shadow w-[170px] text-blue-500">
-              {token ?
+              {username ?
                 <div className=' justify-between items-center text-blue-500'>
                   {/* <li> <h4 className='mr-20'><CgProfile /><span className='font-bold'> {username}</span></h4></li> */}
                   <Link to='/DashBoard'><li><button ><RiDashboard2Fill />My DashBoard</button></li> </Link>
