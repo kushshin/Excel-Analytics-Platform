@@ -98,7 +98,7 @@ export default function AdminDashboard() {
 
   return (
         <div>
-    <div className="w-full flex lg:flex min-h-screen bg-base-200">
+    <div className="flex lg:flex min-h-screen bg-base-200">
         <AdminNavbar />
 
       <aside className="lg:sticky top-0 flex md:h-screen lg:h-screen w-full md:w-64 lg:w-64 flex-col gap-4 border-r border-base-content/10 bg-base-100 p-4 shadow-lg">
