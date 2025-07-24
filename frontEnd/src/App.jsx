@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <div >
+      <div className="overflow-x-hidden">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home/>} />

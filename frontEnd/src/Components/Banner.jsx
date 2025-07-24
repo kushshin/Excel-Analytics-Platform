@@ -14,7 +14,7 @@ function Banner() {
     // console.log(token)
   }, [token])
   return (
-    <div>
+    <div className='w-full'>
       <div className="hero min-h-[300px] bg-base-200  ">
         <div className=" w-full hero bg-base-200 min-h-screen">
           <div className="hero-content flex-col lg:flex-row">
@@ -33,25 +33,6 @@ function Banner() {
             </div>
           </div>
         </div>
-        {/* <div
-          className="hero min-h-screen  "
-          style={{
-            backgroundImage:
-              "url(https://t3.ftcdn.net/jpg/02/74/91/02/360_F_274910292_Xm3dgmmfMJVFrcjUR1eqJmIC7giRrsTF.jpg)",
-                }}
-                >
-          <div className="hero-overlay "></div>
-          <div className="hero-content text-neutral-content text-center">
-            <div className="max-w-md ">
-              <h1 className="mb-5 text-5xl font-bold -z-10">Hello there</h1>
-              <p className="mb-5">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                quasi. In deleniti eaque aut repudiandae et a id nisi.
-              </p>
-              <button className="btn btn-primary">Get Started</button>
-            </div>
-          </div>
-        </div> */}
       </div>
       <div >
         {/* <AllChartDisplay /> */}
