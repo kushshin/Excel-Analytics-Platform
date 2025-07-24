@@ -16,7 +16,7 @@ function Banner() {
   return (
     <div>
       <div className="hero min-h-[300px] bg-base-200  ">
-        <div className="hero bg-base-200 min-h-screen">
+        <div className=" w-full hero bg-base-200 min-h-screen">
           <div className="hero-content flex-col lg:flex-row">
             <img
               src='../img/heroImage.png'
@@ -56,7 +56,7 @@ function Banner() {
       <div >
         {/* <AllChartDisplay /> */}
         <section id="about" className="bg-blue-100 py-4 px-6 md:px-20 scroll-smooth">
-          <div className="max-w-4xl mx-auto text-center flex  flex-col lg:flex-row justify-between items-center ">
+          <div className="w-full mx-auto text-center flex  flex-col lg:flex-row justify-between items-center ">
             <div className="text-lg text-gray-700 leading-relaxed mt-0  ">
               <h2 className="text-3xl font-bold mb-4"><span className='text-blue-500'>A</span>bout <span className='text-blue-500'>U</span>s</h2>
               <p>
