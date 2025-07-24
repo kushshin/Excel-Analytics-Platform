@@ -127,7 +127,7 @@ function AllChartDisplay() {
              {chart.uploadedBy === userId ?   <img src="/img/trash.png" alt="" className='w-5 h-5 cursor-pointer'  onClick={()=>deleteChart(chart._id)}/>: ""}
               </div>
               <ChartComponent data={chartData}  ref={el => (chartDownloadRef.current[chart._id] = el)} />
-                {token || Atoken ? 
+                {username ? 
                 <div>
               <button onClick={()=>downloadPDF(chart._id)} className='btn bg-blue-400'>Export PDF</button>
               <button onClick={()=>downloadPNG(chart._id)} className='btn bg-blue-400'>download PNG</button>
