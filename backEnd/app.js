@@ -31,10 +31,10 @@ app.use(cookieParser())
     app.use('/api/admin', adminRouter)
     // app.use('/api/chart-summary', chartAIRouter)
     
-//    app.get("/check-token", (req, res) => {
-//   console.log("Token from cookie:", req.cookies.Token);
-//   res.send("Check terminal for cookie token.");
-// });
+   app.get("/check-token", (req, res) => {
+  console.log("Token from cookie:", req.cookies.Token);
+  res.send("Check terminal for cookie token.");
+});
     
     DBconnection()
 

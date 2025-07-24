@@ -33,7 +33,11 @@ function Navbar() {
   // console.log(username)
 
   const handleLogout = () => {
-    Cookie.remove("Token");
+    Cookie.remove("Token",{
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None'
+  });
     window.localStorage.clear("");
     toast.success("you have successfully loggedout");
     navigate("/");
