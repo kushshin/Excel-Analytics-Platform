@@ -49,7 +49,7 @@ function AdminNavbar() {
 
   return (
     <div>
-      <nav className="  bg-gray-100 shadow-md z-10 fixed top-0 w-[100%]">
+      <nav className="  bg-gray-100 shadow-md z-10 fixed top-0 w-full sm:w-[500px] md:w-full lg:w-full">
         <div className="navbar bg-blue-100 shadow-sm  z-10">
           <img src="../img/chart1.png" alt="" className='w-10 h-10 ml-5' />
           <div className="navbar-start flex justify-center items-center ml-20  lg:ml-56">

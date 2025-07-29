@@ -103,7 +103,7 @@ function CreateChart() {
     <div>
       <Navbar />
       <h2 className="text-xl font-bold mt-24 text-blue-500 italic text-center">Build Your Chart</h2>
-      <div className=" lg:flex p-2 mt-10  border-2    rounded-lg mb-6 m-auto w-[90%] ">
+      <div className=" lg:flex p-2 mt-10  border-2    rounded-lg mb-6 m-auto w-[450px] sm:w-full md:w-full lg:w-[90%]">
 
         {/* <div className="  mt-2 p-2  border-2">
           <div>
@@ -149,7 +149,7 @@ function CreateChart() {
           </div>
         </div> */}
 
-        <div className="mt-1 mr-4 p-6 bg-white shadow-lg rounded-2xl ring-1 ring-slate-200
+        <div className=" mt-1 mr-4 p-6 bg-white shadow-lg rounded-2xl ring-1 ring-slate-200
                 dark:bg-slate-800 dark:ring-slate-700">
           <h3 className="text-lg italic bg-gray-400 text-center rounded-lg font-semibold text-slate-700 mb-4 dark:text-slate-200">
             Chart Configuration

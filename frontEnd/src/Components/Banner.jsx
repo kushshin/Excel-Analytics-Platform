@@ -14,7 +14,7 @@ function Banner() {
     // console.log(token)
   }, [token])
   return (
-    <div className='w-full'>
+    <div className='w-[500px] sm:w-full md:w-full lg:w-full'>
       <div className="hero min-h-[300px] bg-base-200  ">
         <div className=" w-full hero bg-base-200 min-h-screen">
           <div className="hero-content flex-col lg:flex-row">

@@ -23,9 +23,9 @@ function AdminChartGallery() {
   );
   return (
     <div>
-        <div className='md:flex lg:flex min-h-screen bg-base-200 '>
+        <div className='w-[500px] sm:w-full md:flex lg:flex min-h-screen bg-base-200 '>
         <AdminNavbar/>
-          <aside className="lg:sticky top-0 flex md:h-screen lg:h-screen w-[100%] md:w-64 lg:w-64 flex-col gap-4 border-r border-base-content/10 bg-base-100 p-4 shadow-lg">
+          <aside className="lg:sticky top-0 flex md:h-screen lg:h-screen w-[500px] md:w-64 lg:w-64 flex-col gap-4 border-r border-base-content/10 bg-blue-100 p-4 shadow-lg">
         <h1 className="mb-4 text-center text-2xl font-semibold tracking-wide mt-20">
           Admin
         </h1>

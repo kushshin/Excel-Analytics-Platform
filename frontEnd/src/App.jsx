@@ -8,6 +8,8 @@ import CreateChart from './Pages/CreateChart';
 import ChartGallery from './Pages/ChartGallery';
 import AdminDashBoard from './Pages/AdminDashBoard';
 import AdminChartGallery from './Pages/AdminChartGallery';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 // import './App.css'
 
 function App() {
@@ -15,7 +17,8 @@ function App() {
 
   return (
     <>
-      <div className="overflow-x-hidden">
+      {/* <div className="overflow-x-hidden"> */}
+      <div >
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home/>} />
@@ -25,6 +28,8 @@ function App() {
             <Route path="/chartGallery" element={<ChartGallery/>} />
             <Route path="/AdminDashBoard" element={<AdminDashBoard/>} />
             <Route path="/AdminChartGallery" element={<AdminChartGallery/>} />
+            <Route path="/forgotPassword" element={<ForgotPassword/>} />
+            <Route path="/reset-password/:token" element={<ResetPassword/>} />
             </Routes>       
         </BrowserRouter>
         <Toaster/>

@@ -133,14 +133,14 @@ function DashBoard() {
       <Navbar />
       <div>
         <div className=' block lg:flex justify-between mr-20 '>
-          <div className=' w-[490px] md:w-[600px] lg:w-[250px]  text-center border-2 bg-base-100 border-b-0 h-[200px] lg:h-[700px] mt-16 p-4'>
+          <div className=' w-[490px] md:w-[600px] lg:w-[250px]  text-center lg:border-2 bg-base-100 border-b-0 h-[200px] lg:h-[700px] mt-16 p-4'>
             <div className='w-[100px]  h-[100px] rounded-full text-center pt-8 text-[24px] ml-48 lg:ml-10 bg-gray-200'>
               <strong>{newUsername}</strong>
             </div>
             <h1 class="px-4 py-2 rounded-lg font-medium
                      bg-base-100 text-base-content/80
                                    hover:bg-base-300 hover:text-black
-                             transition-colors duration-150 ml-5">{email}</h1>
+                             transition-colors duration-150 ml-5 lg:mr-10 text-[12px]">{email}</h1>
             <hr />
             <ul class=" w-96 mt-2 mx-auto lg:w-48 lg:mt-10 lg:space-y-2 flex items-center lg:block">
               <Link to='/chartGallery'><li
@@ -184,7 +184,7 @@ function DashBoard() {
             <h1 className="text-3xl font-bold mt-28 text text-center ml-16"><span className='text-blue-500'>O</span>ver<span className='text-blue-500'>V</span>iew</h1>
             {/* <div className="stats shadow h-[100px] mt-10 w-[450px]">
             </div> */}
-            <div className='md:flex lg:flex border-2 ml-20 lg:m-0 p-10'>
+            <div className='w-[350px] sm:w-full md:w-full lg:w-full md:flex lg:flex border-2 ml-20 lg:m-0 p-10 bg-blue-100 rounded-2xl'>
               <div className="stat  ">
                 <button className="btn bg-blue-400 w-52 " onClick={() => navigate('/uploadExcel', { state: excelFileName })}    >UPLOAD EXCEL </button>
               </div>

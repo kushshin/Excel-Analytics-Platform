@@ -16,7 +16,8 @@ dotenv.config()
 const PORT = process.env.PORT || 3000
 
 app.use(cors(
-    { origin: "https://excel-analytics-platform-mauve.vercel.app",
+    // { origin: "https://excel-analytics-platform-mauve.vercel.app",
+    { origin: true,
         credentials: true
     }))
 app.use(express.json())

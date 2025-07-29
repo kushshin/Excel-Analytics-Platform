@@ -19,6 +19,7 @@ import { IoIosInformationCircle } from "react-icons/io";
 import { IoMdDownload } from "react-icons/io";
 import { RiGalleryView2 } from "react-icons/ri";
 import { FaPhoneAlt } from "react-icons/fa";
+// import ForgotPassword from '../Pages/ForgotPassword';
 // import { FaChartLine } from "react-icons/fa";
 
 
@@ -33,11 +34,7 @@ function Navbar() {
   // console.log(username)
 
   const handleLogout = () => {
-    Cookie.remove("Token",{
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None'
-  });
+    Cookie.remove("Token",{httpOnly: true,secure:true, sameSite:'None'});
     window.localStorage.clear("");
     toast.success("you have successfully loggedout");
     navigate("/");
@@ -54,7 +51,7 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="  bg-gray-100 shadow-md z-10 fixed top-0 w-[100%]">
+      <nav className="  bg-gray-100 shadow-md z-10 fixed top-0 -full sm:w-[480px] w-full md:w-full lg:w-full">
         <div className="navbar bg-blue-100 shadow-sm  z-10">
           <img src="../img/chart1.png" alt="" className='w-10 h-10 ml-5' />
           <div className="navbar-start flex justify-center items-center ml-20  lg:ml-48   ">
@@ -63,13 +60,13 @@ function Navbar() {
             </div>
           </div>
           {/* <Link to="/"> <div className="text-xl font-bold">Excel Analytics Platform</div></Link>     */}
-          <div className='hidden md:flex items-center space-x-6 mr-2' >
+          <div className='hidden md:flex items-center space-x-6 mr-8' >
             <Link to='/'>  <button className=" btn mr-2 bg-blue-400">Home</button></Link>
             <a href="#about" className="btn mr-2 ">About Us</a>
             <a href="#contact" className="btn mr-8 ">Contact</a>
           </div>
           <div className="dropdown relative ">
-            <div tabIndex={0} role="button" className="btn btn-ghost ">
+            <div tabIndex={0} role="button" className="btn text-center ml-6 sm:ml-0 md:ml-o lg:ml-0 ">
               {username ?
                 (<h4 className='mr-1 flex'><span className='font-bold text-blue-500 '> {username}</span><FaCaretDown /></h4>) :
                 (<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
@@ -107,6 +104,7 @@ function Navbar() {
       </nav>
       <Login />
       <Register />
+      {/* <ForgotPassword/> */}
       <AdminLogin />
     </div>
   )

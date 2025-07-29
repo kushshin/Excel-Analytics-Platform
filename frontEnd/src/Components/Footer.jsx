@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div>
     <div className='items-center '>
- <footer id="contact"className="footer sm:footer-horizontal bg-blue-100 text-base-content pr-10 pb-10 pt-10 pl-40 mt-0  ">
+ <footer id="contact"className="w-[500px] sm:w-full md:w-full lg:w-full footer sm:footer-horizontal bg-blue-100 text-base-content pr-10 pb-10 pt-10 pl-40 mt-0  ">
   <nav>
     <h6 className="footer-title text-blue-500">Services</h6>
     <a className="link link-hover">Branding</a>
