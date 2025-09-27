@@ -12,19 +12,7 @@ const saveChartData = async (req, res) => {
   try {
     const userId = req.user.id;
   
-//     const filesize = req.file.size;
-//     const workbook = xlsx.readFile(req.file.path);
-//     const sheet = workbook.Sheets[workbook.SheetNames[0]];
-//     const newData = xlsx.utils.sheet_to_json(sheet);
 
-//   const newExcelDoc = new ExcelModel({
-//   fileName: req.file.originalname,
-//   uploadedBy: userId,
-//   fileSize: filesize,
-//   ExcelData: newData,
-// });
-
-// const newExcel = await newExcelDoc.save();
 
     const chartDetails = JSON.parse(req.body.chartDetails);
 // console.log(chartDetails)
